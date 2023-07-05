@@ -33,7 +33,7 @@ class Parser():
             true_path = os.path.join(upper_path, e_path)    #真实路径，用于判断是否需要递归
             cname = os.path.split(e_path)[-1]   #tree中显示的名称，取路径/文件的最后一级
             if os.path.isdir(true_path):
-                cname = cname + '>>' #标记文件夹，用于区分
+                # cname = cname + '>>' #标记文件夹，用于区分
                 self.ex.append('┆︎ {}{}\n'.format("     ┆︎"*mark, "── "+cname))   #记录文件夹，用于导出
             elif not os.path.isdir(true_path):
                 self.ex.append('┆︎ {}{}\n'.format("     ┆︎"*mark, "── "+cname))  #记录文件，用于导出
@@ -45,13 +45,15 @@ class Parser():
         '''导出文件目录结构'''
 
         # 新建txt，以上一级文件夹名命名
-        w_file = open('FileTree.txt', 'w', encoding='utf-8')
+        file_name = os.path.split(self.cur_root)[-1]
+        w_file = open(file_name + '.txt', 'w', encoding='utf-8')
  
         for e in self.ex:
             w_file.write(e)
             # 写入当前文件路径
         w_file.close()
-        print('>> A txt file created on your woring path.')
+        cur_dir = os.getcwd() + r'\\' + file_name + '.txt'
+        print('{} created'.format(cur_dir))
 
     def run_all(self):
         self.path_builder(self.cur_root, 0)  
