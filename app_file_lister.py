@@ -52,8 +52,8 @@ class Parser():
             w_file.write(e)
             # 写入当前文件路径
         w_file.close()
-        cur_dir = os.getcwd() + r'\\' + file_name + '.txt'
-        print('{} created'.format(cur_dir))
+        cur_dir = os.getcwd() + '\\' + file_name + '.txt'
+        print('[{}] created'.format(cur_dir))
 
     def run_all(self):
         self.path_builder(self.cur_root, 0)  
